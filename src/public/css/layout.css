@@ -1,0 +1,104 @@
+/* Reset cơ bản */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Header Styles */
+header {
+    background-color: #223871;
+    /* Màu xanh đậm chủ đạo */
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 60px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #1b2b5b;
+    border-radius: 8px;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.auth-buttons a {
+    color: white;
+    background-color: #1b2b5b;
+    padding: 10px 25px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.auth-buttons a:hover {
+    background-color: #445d9a;
+    transform: scale(1.05);
+}
+
+.auth-buttons .login-btn {
+    background-color: transparent;
+    border: 2px solid white;
+}
+
+.auth-buttons .login-btn:hover {
+    background-color: white;
+    color: #223871;
+}
+
+/* Main Content Styles */
+main {
+    margin: 30px 0;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #1b2b5b;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer p {
+    margin: 0;
+}

@@ -6,6 +6,7 @@ import User from './models/User.js';
 import RoomType from './models/RoomType.js';
 import Room from './models/Room.js';
 import Booking from './models/Booking.js';
+import router from './routes/index.js';
 
 const app = express();
 const port = 3000;
@@ -33,15 +34,7 @@ sequelize.sync({ force: false }) // force: false -> không xóa dữ liệu cũ
     console.error('Không thể kết nối với cơ sở dữ liệu:', err);
   });
 
-// Thiết lập route cơ bản để render trang EJS
-app.get('/', (req, res) => {
-  res.render('index', { title: 'Trang Chủ' });
-});
-
-// Route cho trang đăng nhập
-app.get('/login', (req, res) => {
-  res.render('login', { title: 'Đăng nhập' });
-});
+app.use('/', router);
 
 // Máy chủ lắng nghe tại cổng đã chỉ định
 app.listen(port, () => {
