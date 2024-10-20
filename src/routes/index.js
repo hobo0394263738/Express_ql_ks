@@ -29,4 +29,19 @@ router.get('/register', (req, res) => {
 // Route xử lý đăng ký (POST)
 router.post('/register', AuthController.register);
 
+router.get('/admin/rooms', (req, res) => {
+  res.render('layouts/admin-layout', { 
+    title: 'Quản lý Phòng', 
+    body: '../admin/rooms'  // Đường dẫn tới nội dung chính của trang quản lý phòng
+  });
+});
+
+router.get('/admin/room-types', (req, res) => {
+  res.render('layouts/admin-layout', { 
+    title: 'Quản lý Loại Phòng', 
+    body: '../admin/room-types'  // Đường dẫn tới file room-types.ejs
+  });
+});
+
+
 export default router;
