@@ -5,14 +5,11 @@ import RoomController from '../controllers/RoomController.js';
 
 const router = express.Router();
 
-// Route cho trang chủ
-router.get('/', (req, res) => {
-  res.render('layouts/public-layout', {
-    title: 'Trang Chủ',
-    body: '../index',
-    user: req.session.user // Truyền thông tin user từ session
-  });
-});
+// Route for rendering the homepage with a list of rooms
+router.get('/', RoomController.renderHomePage);
+
+// Route for rendering the room details page
+router.get('/room/:id', RoomController.renderRoomDetailsPage);
 
 // Route cho trang đăng nhập
 router.get('/login', (req, res) => {

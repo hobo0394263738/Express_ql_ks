@@ -2,6 +2,45 @@ import RoomService from '../services/RoomService.js';
 import RoomTypeService from '../services/RoomTypeService.js'; 
 
 class RoomController {
+  // Render the homepage with a list of rooms inside the public layout
+  static async renderHomePage(req, res) {
+    try {
+      const rooms = await RoomService.getAllRooms(); // Fetch all rooms
+      res.render('layouts/public-layout', {
+        title: 'Trang Chủ',
+        body: '../index',
+        user: req.session.user,
+        rooms
+      });
+    } catch (error) {
+      res.render('layouts/public-layout', {
+        title: 'Trang Chủ',
+        body: '../index',
+        error: 'Có lỗi xảy ra khi tải danh sách phòng',
+        user: req.session.user 
+      });
+    }
+  }
+
+  // Render the room details page inside the public layout
+  static async renderRoomDetailsPage(req, res) {
+    const { id } = req.params;
+    try {
+      const room = await RoomService.getRoomById(id);
+      if (!room) {
+        return res.redirect('/');
+      }
+      res.render('layouts/public-layout', {
+        title: `Chi Tiết Phòng ${room.room_number}`,
+        body: '../room-details',
+        user: req.session.user,
+        room
+      });
+    } catch (error) {
+      res.redirect('/');
+    }
+  }
+
   // Hiển thị trang quản lý phòng
   static async renderRoomsPage(req, res) {
     try {
