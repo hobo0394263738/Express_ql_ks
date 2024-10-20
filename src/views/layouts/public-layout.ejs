@@ -14,8 +14,8 @@
 
 <body>
 
-    <!-- Gọi header -->
-    <%- include('../partials/header') %>
+    <!-- Gọi header và truyền thông tin user đã nhận từ route -->
+    <%- include('../partials/header', { user: user }) %>
 
         <!-- Main Content -->
         <main>

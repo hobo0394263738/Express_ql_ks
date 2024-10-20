@@ -12,9 +12,20 @@
                 <li><a href="/booking">Đặt Phòng</a></li>
             </ul>
         </nav>
-        <div class="auth-buttons">
-            <a href="/login" class="login-btn">Đăng nhập</a>
-            <a href="/register" class="register-btn">Đăng ký</a>
+        <div class="custom-auth-dropdown">
+            <% if (user) { %>
+                <div class="custom-dropdown">
+                    <button class="custom-dropbtn">Xin chào, <%= user.username %> <i
+                                class="fa fa-caret-down"></i></button>
+                    <div class="custom-dropdown-menu">
+                        <a href="/my-bookings" class="custom-dropdown-link">Phòng đã đặt</a>
+                        <a href="/logout" class="custom-dropdown-link">Đăng xuất</a>
+                    </div>
+                </div>
+                <% } else { %>
+                    <a href="/login" class="custom-login-btn">Đăng nhập</a>
+                    <a href="/register" class="custom-register-btn">Đăng ký</a>
+                    <% } %>
         </div>
     </div>
 </header>

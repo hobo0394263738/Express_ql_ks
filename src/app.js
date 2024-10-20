@@ -7,9 +7,17 @@ import RoomType from './models/RoomType.js';
 import Room from './models/Room.js';
 import Booking from './models/Booking.js';
 import router from './routes/index.js';
+import session from 'express-session';
 
 const app = express();
 const port = 3000;
+
+app.use(session({
+  secret: 'your-secret-key',  // Khóa bí mật để mã hóa session
+  resave: false,              // Không lưu session nếu không có thay đổi
+  saveUninitialized: true,    // Lưu session mới dù chưa có dữ liệu
+  cookie: { secure: false }   // Cookie không cần HTTPS (bật `secure: true` trong môi trường production)
+}));
 
 // Xử lý __dirname trong ESM
 const __filename = fileURLToPath(import.meta.url);

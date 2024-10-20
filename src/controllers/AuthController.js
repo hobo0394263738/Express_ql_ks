@@ -1,4 +1,5 @@
 import UserService from '../services/UserService.js';
+import bcrypt from 'bcrypt';
 
 class AuthController {
     static async register(req, res) {
@@ -37,6 +38,56 @@ class AuthController {
             });
         }
     }
+
+    // Xử lý đăng nhập
+    static async login(req, res) {
+        const { email, password } = req.body;
+
+        try {
+            // Tìm người dùng theo email
+            const user = await UserService.findUserByEmail(email);
+            
+            if (!user) {
+                return res.render('layouts/public-layout', {
+                    title: 'Đăng nhập',
+                    body: '../login',
+                    error: 'Email hoặc mật khẩu không đúng'
+                });
+            }
+
+            // Kiểm tra mật khẩu
+            const isPasswordValid = await bcrypt.compare(password, user.password);
+            if (!isPasswordValid) {
+                return res.render('layouts/public-layout', {
+                        title: 'Đăng nhập',
+                        body: '../login',
+                        error: 'Email hoặc mật khẩu không đúng'
+                    });
+            }
+
+            // Lưu thông tin người dùng vào session
+            req.session.user = {
+                id: user.id,
+                username: user.username,
+                role: user.role
+            };
+
+            // Xác định vai trò của người dùng và chuyển hướng
+            if (user.role === 'admin') {
+                return res.redirect('/admin'); // Trang chủ của admin
+            } else {
+                return res.redirect('/'); // Trang chủ public
+            }
+
+        } catch (error) {
+            return res.render('layouts/public-layout', {
+                title: 'Đăng nhập',
+                body: '../login',
+                error: 'Có lỗi xảy ra, vui lòng thử lại'
+            });
+        }
+    }
+
 }
 
 export default AuthController;
