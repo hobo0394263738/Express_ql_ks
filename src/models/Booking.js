@@ -6,11 +6,11 @@ import Room from './Room.js';  // Import model Room
 const Booking = sequelize.define('Booking', {
   check_in_date: {
     type: DataTypes.DATE,
-    allowNull: false
+    allowNull: true
   },
   check_out_date: {
     type: DataTypes.DATE,
-    allowNull: false
+    allowNull: true
   },
   total_price: {
     type: DataTypes.INTEGER,

@@ -2,6 +2,7 @@ import express from 'express';
 import AuthController from '../controllers/AuthController.js';
 import RoomTypeController from '../controllers/RoomTypeController.js';
 import RoomController from '../controllers/RoomController.js';
+import BookingController from '../controllers/BookingController.js';
 
 const router = express.Router();
 
@@ -68,5 +69,11 @@ router.get('/admin/room/edit/:id', RoomController.renderEditRoomPage);
 
 // Route to handle the room update submission
 router.post('/admin/room/edit/:id', RoomController.updateRoom);
+
+// Route để xử lý việc đặt phòng
+router.get('/room/book/:id', BookingController.createBooking);
+
+// Route hiển thị danh sách phòng đã đặt của 1 khách hàng
+router.get('/my-bookings', BookingController.getMyBookings);
 
 export default router;
