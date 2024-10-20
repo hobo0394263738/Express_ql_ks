@@ -66,4 +66,10 @@ router.get('/admin/room/add', RoomController.renderAddRoomPage);
 // Route to handle room creation
 router.post('/admin/room/add', RoomController.addRoom);
 
+// Route to render the "Edit Room" page
+router.get('/admin/room/edit/:id', RoomController.renderEditRoomPage);
+
+// Route to handle the room update submission
+router.post('/admin/room/edit/:id', RoomController.updateRoom);
+
 export default router;

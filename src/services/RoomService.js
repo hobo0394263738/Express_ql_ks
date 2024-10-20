@@ -28,6 +28,32 @@ class RoomService {
       throw new Error(`Lỗi khi thêm phòng: ${error.message}`);
     }
   }
+
+  static async getRoomById(id) {
+    try {
+      const room = await Room.findOne({
+        where: { id },
+        include: [{ model: RoomType, as: 'RoomType' }]
+      });
+      return room;
+    } catch (error) {
+      throw new Error(`Lỗi khi lấy phòng: ${error.message}`);
+    }
+  }
+
+  // Update room details
+  static async updateRoom(id, updatedData) {
+    try {
+      const room = await Room.findByPk(id);
+      if (!room) {
+        throw new Error('Phòng không tồn tại');
+      }
+      await room.update(updatedData);
+      return room;
+    } catch (error) {
+      throw new Error(`Lỗi khi cập nhật phòng: ${error.message}`);
+    }
+  }
 }
 
 export default RoomService;

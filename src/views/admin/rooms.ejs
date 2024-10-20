@@ -28,8 +28,8 @@
                             <%= room.status %>
                         </td>
                         <td>
-                            <button class="edit-btn">Sửa</button>
-                            <button class="delete-btn">Xóa</button>
+                            <a href="/admin/room/edit/<%= room.id %>" class="edit-btn">Sửa</a>
+                            <!-- <button class="delete-btn">Xóa</button> -->
                         </td>
                     </tr>
                     <% }) %>

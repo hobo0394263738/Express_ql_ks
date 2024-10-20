@@ -57,6 +57,49 @@ class RoomController {
       return res.redirect('/admin/room/add');
     }
   }
+
+  static async renderEditRoomPage(req, res) {
+  const { id } = req.params;
+  try {
+    const room = await RoomService.getRoomById(id); // Fetch the room details by ID
+    const roomTypes = await RoomTypeService.getAllRoomTypes(); // Fetch available room types
+    if (!room) {
+      req.session.error = 'Không tìm thấy phòng';
+      return res.redirect('/admin/rooms');
+    }
+    // Render with admin layout
+    res.render('layouts/admin-layout', {
+      title: 'Sửa Phòng',
+      body: '../admin/edit-room', // Path to the EJS template for editing a room
+      room,
+      roomTypes
+    });
+  } catch (error) {
+    req.session.error = `Có lỗi xảy ra: ${error.message}`;
+    res.redirect('/admin/rooms');
+  }
+}
+
+  // Handle the room update
+  static async updateRoom(req, res) {
+    const { id } = req.params;
+    const { room_number, room_type_id, status } = req.body;
+
+    // Basic validation
+    if (!room_number || !room_type_id || !status) {
+      req.session.error = 'Vui lòng điền đầy đủ thông tin';
+      return res.redirect(`/admin/room/edit/${id}`);
+    }
+
+    try {
+      await RoomService.updateRoom(id, { room_number, room_type_id, status });
+      req.session.success = 'Phòng đã được cập nhật thành công';
+      res.redirect('/admin/rooms');
+    } catch (error) {
+      req.session.error = `Có lỗi xảy ra: ${error.message}`;
+      res.redirect(`/admin/room/edit/${id}`);
+    }
+  }
 }
 
 export default RoomController;
