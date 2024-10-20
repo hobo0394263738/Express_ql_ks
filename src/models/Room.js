@@ -16,7 +16,7 @@ const Room = sequelize.define('Room', {
   timestamps: true
 });
 
-// Thiết lập quan hệ với RoomType
-Room.belongsTo(RoomType);
+// Thiết lập quan hệ với RoomType và chỉ định khoá ngoại
+Room.belongsTo(RoomType, { foreignKey: 'room_type_id', as: 'RoomType' });
 
 export default Room;

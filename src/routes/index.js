@@ -1,5 +1,7 @@
 import express from 'express';
 import AuthController from '../controllers/AuthController.js';
+import RoomTypeController from '../controllers/RoomTypeController.js';
+import RoomController from '../controllers/RoomController.js';
 
 const router = express.Router();
 
@@ -27,7 +29,8 @@ router.post('/login', AuthController.login);
 router.get('/register', (req, res) => {
   res.render('layouts/public-layout', {
     title: 'Đăng ký',
-    body: '../register'  // Đường dẫn tới nội dung của register
+    body: '../register',
+    user: req.session.user
   });
 });
 
@@ -41,19 +44,26 @@ router.get('/admin', (req, res) => {
   });
 });
 
-router.get('/admin/rooms', (req, res) => {
-  res.render('layouts/admin-layout', { 
-    title: 'Quản lý Phòng', 
-    body: '../admin/rooms'  // Đường dẫn tới nội dung chính của trang quản lý phòng
+router.get('/admin/room-types', RoomTypeController.renderRoomTypesPage);
+
+// Route hiển thị form thêm loại phòng mới
+router.get('/admin/room-types/add', (req, res) => {
+  res.render('layouts/admin-layout', {
+    title: 'Thêm Loại Phòng',
+    body: '../admin/add-room-type'  // File EJS cho form thêm loại phòng
   });
 });
 
-router.get('/admin/room-types', (req, res) => {
-  res.render('layouts/admin-layout', { 
-    title: 'Quản lý Loại Phòng', 
-    body: '../admin/room-types'  // Đường dẫn tới file room-types.ejs
-  });
-});
+// Route xử lý thêm loại phòng mới (POST)
+router.post('/admin/room-types/add', RoomTypeController.addRoomType);
 
+// Route hiển thị trang quản lý phòng
+router.get('/admin/rooms', RoomController.renderRoomsPage);
+
+// Route to render the "Add Room" page
+router.get('/admin/room/add', RoomController.renderAddRoomPage);
+
+// Route to handle room creation
+router.post('/admin/room/add', RoomController.addRoom);
 
 export default router;

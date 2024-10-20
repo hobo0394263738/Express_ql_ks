@@ -2,7 +2,7 @@
     <h1>Quản lý Loại Phòng</h1>
 
     <div class="actions">
-        <button class="add-room-type-btn">Thêm Loại Phòng</button>
+        <a class="add-room-type-btn" href="/admin/room-types/add">Thêm Loại Phòng</a>
     </div>
 
     <table class="room-types-table">
@@ -14,23 +14,26 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Dữ liệu mẫu, sau này sẽ được thay bằng dữ liệu thực tế -->
-            <tr>
-                <td>Phòng Đơn</td>
-                <td>500,000</td>
-                <td>
-                    <button class="edit-btn">Sửa</button>
-                    <button class="delete-btn">Xóa</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Phòng Đôi</td>
-                <td>800,000</td>
-                <td>
-                    <button class="edit-btn">Sửa</button>
-                    <button class="delete-btn">Xóa</button>
-                </td>
-            </tr>
+            <% if (roomTypes && roomTypes.length> 0) { %>
+                <% roomTypes.forEach(roomType=> { %>
+                    <tr>
+                        <td>
+                            <%= roomType.name %>
+                        </td>
+                        <td>
+                            <%= roomType.price.toLocaleString('vi-VN') %>
+                        </td> <!-- Định dạng giá tiền -->
+                        <td>
+                            <button class="edit-btn">Sửa</button>
+                            <button class="delete-btn">Xóa</button>
+                        </td>
+                    </tr>
+                    <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="3">Chưa có loại phòng nào</td>
+                            </tr>
+                            <% } %>
         </tbody>
     </table>
 </div>

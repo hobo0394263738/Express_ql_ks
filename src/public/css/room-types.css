@@ -17,6 +17,7 @@ h1 {
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    text-decoration: none;
 }
 
 .add-room-type-btn:hover {

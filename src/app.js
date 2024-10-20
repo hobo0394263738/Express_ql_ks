@@ -19,6 +19,14 @@ app.use(session({
   cookie: { secure: false }   // Cookie không cần HTTPS (bật `secure: true` trong môi trường production)
 }));
 
+app.use((req, res, next) => {
+  res.locals.success = req.session.success;
+  res.locals.error = req.session.error;
+  delete req.session.success;
+  delete req.session.error;
+  next();
+});
+
 // Xử lý __dirname trong ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
