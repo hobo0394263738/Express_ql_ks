@@ -1,3 +1,4 @@
+/* Đặt phạm vi chỉ ảnh hưởng đến trang đăng ký */
 .register-page {
     display: flex;
     justify-content: center;
@@ -18,6 +19,17 @@
     margin-bottom: 20px;
     font-size: 24px;
     color: #223871;
+}
+
+/* Thông báo lỗi */
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    text-align: left;
 }
 
 .register-box .input-group {
