@@ -76,4 +76,14 @@ router.get('/room/book/:id', BookingController.createBooking);
 // Route hiển thị danh sách phòng đã đặt của 1 khách hàng
 router.get('/my-bookings', BookingController.getMyBookings);
 
+// Route cho logout
+router.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.redirect('/'); // Nếu có lỗi khi xóa session, điều hướng về trang chủ
+    }
+    res.redirect('/login'); // Điều hướng đến trang login sau khi đăng xuất
+  });
+});
+
 export default router;
